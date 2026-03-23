@@ -42,9 +42,7 @@ int main (int argc, char *argv[]) {
         printf("> ");
         if (fgets(buffer, sizeof(buffer), stdin) == NULL) break;
 
-        buffer[strcspn(buffer, "\n")] = 0;
-
-        if (strcmp(buffer, "exit") == 0) {
+        if (strcmp(buffer, "exit\n") == 0) {
             break;
         }
 
