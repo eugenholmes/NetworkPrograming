@@ -33,7 +33,6 @@ int main(int argc, char *argv[]) {
         perror("listen() failed");
         exit(EXIT_FAILURE);
     }
-
     while (1) {
         struct sockaddr_in client_addr;
         socklen_t client_addr_len = sizeof(client_addr);
@@ -69,7 +68,6 @@ int main(int argc, char *argv[]) {
         while ((len = recv(client, buf, sizeof(buf), 0)) > 0) {
             fwrite(buf, 1, len, f_out);
         }
-
         printf("Received data and saved to %s\n", data);
         
         fclose(f_out);
