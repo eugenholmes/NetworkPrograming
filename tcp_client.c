@@ -32,8 +32,14 @@ int main (int argc, char *argv[]) {
     int bytes_received = recv(client, recv_buf, sizeof(recv_buf) - 1, 0);
     if (bytes_received > 0) {
         printf("Server: %s\n", recv_buf);
+    } else if (bytes_received == 0) {
+        printf("Server closed the connection\n");
+        close(client);
+        return 0;
     } else {
         perror("recv() failed");
+        close(client);
+        exit(EXIT_FAILURE);
     }
     printf("Enter content (type 'exit' to quit):\n");
 
