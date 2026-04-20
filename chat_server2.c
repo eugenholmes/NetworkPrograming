@@ -101,8 +101,7 @@ int main() {
                     continue;
                 } else {
                     buf[ret] = 0;
-                    if (buf[strlen(buf) - 1] == '\n') buf[strlen(buf) - 1] = 0;
-                    if (buf[strlen(buf) - 1] == '\r') buf[strlen(buf) - 1] = 0;
+                    buf[strcspn(buf, "\r\n")] = 0;
 
                     if (client_ids[i] == NULL) {
                         char id[50], name[50];

@@ -76,9 +76,10 @@ int main() {
                 printf("New client connected %d\n", client);
                 fds[nfds].fd = client;
                 fds[nfds].events = POLLIN;
-                nfds++;
+
                 clients[nfds].fd = client;
                 clients[nfds].is_authenticated = 0;
+                nfds++;
                 send(client, login, strlen(login), 0);
             } else {
                 close(client);
@@ -109,8 +110,7 @@ int main() {
                 } else {
                     buf[ret] = 0;
 
-                    if (buf[strlen(buf) - 1] == '\n') buf[strlen(buf) - 1] = 0;
-                    if (buf[strlen(buf) - 1] == '\r') buf[strlen(buf) - 1] = 0;
+                    buf[strcspn(buf, "\r\n")] = 0;
 
                     if (clients[i].is_authenticated == 0) {
                         char user[50], pass[50];
